@@ -50,6 +50,13 @@ fn main() {
             Result::Ok(val) => val,
             Result::Err(err) => panic!("Error: {}", err),
         };
+
+        if gpio_matches.is_present("INPUT") {
+            let pin = gpio_unwraped.into_input();
+            println!("Ping {}:\t{}", pin.pin(), pin.read());
+            return;
+        }
+
         let mut pin = gpio_unwraped.into_output();
         pin.set_reset_on_drop(false);
         if gpio_matches
