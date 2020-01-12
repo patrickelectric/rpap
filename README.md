@@ -1,5 +1,11 @@
 # Raspberry Peripherals Access Program
 
+Allow access to Raspberry hardware peripherals
+
+- [x] GPIO
+- [ ] I²C
+- [ ] SPI
+
 ## Examples
 ```sh
 # Set pin 0 as output and HIGH state
