@@ -20,7 +20,7 @@ fn main() {
                 .about("Control GPIO peripherals")
                 .setting(AppSettings::SubcommandRequiredElseHelp)
                 .arg(
-                    Arg::with_name("PIN")
+                    Arg::with_name("pin")
                         .help("Set the pin used, should be inside the range [0, 27].")
                         .required(true),
                 )
@@ -41,7 +41,7 @@ fn main() {
     match matches.subcommand() {
         ("gpio", Some(gpio_subcommand)) => {
             let pin_number = gpio_subcommand
-                .value_of("PIN")
+                .value_of("pin")
                 .unwrap()
                 .parse::<u8>()
                 .unwrap_or_else(|_| panic!("Expected PIN number between 0 and 27."));
@@ -52,12 +52,12 @@ fn main() {
             };
 
             match gpio_subcommand.subcommand() {
-                ("INPUT", Some(_)) => {
+                ("input", Some(_)) => {
                     let pin = gpio.into_input();
                     println!("Pin {}:\t{}", pin.pin(), pin.read());
                 }
 
-                ("OUTPUT", Some(output_subcommand)) => {
+                ("output", Some(output_subcommand)) => {
                     let mut pin = gpio.into_output();
                     // Avoid reset state after finishing
                     pin.set_reset_on_drop(false);
